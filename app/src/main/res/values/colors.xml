@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pink_primary">#C2185B</color>
+    <color name="pink_accent">#FF4D94</color>
+    <color name="pet_bg">#FFF0F6</color>
+</resources>

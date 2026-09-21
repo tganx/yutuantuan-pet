@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>鱼团团 · 画画桌宠</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;overflow:hidden;background:transparent;}
+  body{
+    display:flex;align-items:center;justify-content:center;
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    user-select:none;
+  }
+  .stage{
+    position:relative;display:flex;align-items:center;justify-content:center;
+    width:100%;height:100%;
+  }
+  .glow{
+    position:absolute;width:82%;height:82%;border-radius:50%;
+    background:radial-gradient(circle, rgba(255,105,180,.34), transparent 70%);
+    animation:breathe 4.6s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{transform:scale(1);opacity:.7;}
+    50%{transform:scale(1.08);opacity:1;}
+  }
+  svg{width:100%;height:100%;overflow:visible;position:relative;z-index:2;}
+  #pet{animation:float 4.6s ease-in-out infinite;transform-origin:center;}
+  @keyframes float{
+    0%,100%{transform:translateY(0) rotate(-1deg);}
+    50%{transform:translateY(-11px) rotate(1.5deg);}
+  }
+  .eyelid{animation:blink 5.5s infinite;}
+  @keyframes blink{
+    0%,93%,100%{transform:scaleY(0);}
+    95%,97%{transform:scaleY(1);}
+  }
+  #tuft{transform-origin:200px 74px;animation:sway 3s ease-in-out infinite;}
+  @keyframes sway{
+    0%,100%{transform:rotate(-5deg);}
+    50%{transform:rotate(7deg);}
+  }
+  #palette{transform-origin:130px 250px;animation:pwob 2.6s ease-in-out infinite;}
+  @keyframes pwob{
+    0%,100%{transform:rotate(-3deg);}
+    50%{transform:rotate(4deg);}
+  }
+  .poke{animation:poke .42s ease-out;}
+  @keyframes poke{
+    0%{transform:scale(1,1);}
+    35%{transform:scale(1.12,.88);}
+    70%{transform:scale(.93,1.09);}
+    100%{transform:scale(1,1);}
+  }
+  .bubble-text{
+    position:absolute;top:2%;left:50%;transform:translateX(-50%) translateY(8px);
+    background:rgba(255,255,255,.86);border:2px solid rgba(255,105,180,.5);
+    border-radius:16px;padding:8px 13px;
+    font-size:13px;line-height:1.45;max-width:98%;text-align:center;
+    color:#c2185b;font-weight:600;opacity:0;
+    transition:opacity .3s,transform .3s;box-shadow:0 6px 20px rgba(255,105,180,.3);
+    z-index:3;
+  }
+  .bubble-text.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+<div class="bubble-text" id="bubble">……你来啦。画笔要拿稳哦。</div>
+
+<div class="stage">
+  <div class="glow"></div>
+  <svg viewBox="0 0 400 400" id="pet">
+    <defs>
+      <radialGradient id="bodyG" cx="38%" cy="30%" r="72%">
+        <stop offset="0%"   stop-color="#ffb3d9"/>
+        <stop offset="38%"  stop-color="#ff7ab8"/>
+        <stop offset="72%"  stop-color="#ff3d92"/>
+        <stop offset="100%" stop-color="#e60067"/>
+      </radialGradient>
+      <radialGradient id="berryG" cx="36%" cy="32%" r="70%">
+        <stop offset="0%"   stop-color="#c0392b"/>
+        <stop offset="45%"  stop-color="#9e2b1e"/>
+        <stop offset="100%" stop-color="#6e1a10"/>
+      </radialGradient>
+      <radialGradient id="shine" cx="35%" cy="28%" r="50%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity=".9"/>
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDeviation="3.2" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <path id="tuft"
+          d="M200 60
+             C 175 60, 172 92, 182 116
+             C 188 132, 214 132, 220 116
+             C 230 92, 225 60, 200 60 Z"
+          fill="#ff5aa8"/>
+    <ellipse cx="196" cy="82" rx="9" ry="14" fill="#ff8ec4" opacity=".65"/>
+
+    <g filter="url(#soft)">
+      <ellipse cx="200" cy="228" rx="132" ry="126" fill="url(#bodyG)"/>
+      <ellipse cx="146" cy="176" rx="46" ry="34" fill="url(#shine)"/>
+    </g>
+
+    <g>
+      <ellipse cx="290" cy="168" rx="62" ry="58" fill="url(#berryG)"/>
+      <ellipse cx="272" cy="148" rx="17" ry="13" fill="#d9614f" opacity=".55"/>
+    </g>
+
+    <g>
+      <ellipse cx="158" cy="226" rx="19" ry="23" fill="#2b1a3a"/>
+      <ellipse cx="153" cy="218" rx="6" ry="7.5" fill="#eaf0ff"/>
+      <circle cx="164" cy="234" r="3.4" fill="#4fc3f7" opacity=".9"/>
+      <ellipse class="eyelid" cx="158" cy="226" rx="20" ry="24" fill="#ff5aa8"
+               style="transform-origin:158px 226px;"/>
+    </g>
+    <g>
+      <ellipse cx="242" cy="226" rx="19" ry="23" fill="#2b1a3a"/>
+      <ellipse cx="237" cy="218" rx="6" ry="7.5" fill="#eaf0ff"/>
+      <circle cx="248" cy="234" r="3.4" fill="#4fc3f7" opacity=".9"/>
+      <ellipse class="eyelid" cx="242" cy="226" rx="20" ry="24" fill="#ff5aa8"
+               style="transform-origin:242px 226px;"/>
+    </g>
+
+    <path d="M138 196 Q152 190 166 197" stroke="#2b1a3a" stroke-width="5.5"
+          fill="none" stroke-linecap="round"/>
+    <path d="M234 194 Q248 188 264 195" stroke="#2b1a3a" stroke-width="5.5"
+          fill="none" stroke-linecap="round"/>
+
+    <path id="mouth" d="M182 268 Q190 278 200 268 Q210 278 218 268"
+          stroke="#2b1a3a" stroke-width="6" fill="none"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g id="palette">
+      <ellipse cx="118" cy="330" rx="66" ry="48" fill="#fbf1cf" stroke="#e8d9a0" stroke-width="3"/>
+      <ellipse cx="94" cy="312" rx="21" ry="18" fill="#ff4d5e"/>
+      <ellipse cx="88" cy="306" rx="6" ry="5" fill="#ff9aa4" opacity=".8"/>
+      <ellipse cx="112" cy="352" rx="20" ry="17" fill="#4fc3f7"/>
+      <ellipse cx="106" cy="346" rx="6" ry="5" fill="#a9e4ff" opacity=".85"/>
+      <ellipse cx="152" cy="322" rx="14" ry="12" fill="#ffffff" stroke="#eadfbe" stroke-width="2"/>
+      <circle cx="168" cy="356" r="7" fill="#ffd1e0"/>
+      <circle cx="58"  cy="352" r="5" fill="#ffd1e0"/>
+    </g>
+
+    <ellipse cx="150" cy="292" rx="26" ry="20" fill="#ff5aa8" opacity=".95"/>
+  </svg>
+</div>
+
+<script>
+const pet = document.getElementById('pet');
+const bubble = document.getElementById('bubble');
+const mouth = document.getElementById('mouth');
+
+let heat = 0, taps = 0, dislikeCooldown = 0;
+let lastLine = "";
+window.gestureLog = [];
+
+const lines = {
+  t1:[
+    "……你来啦。画笔要拿稳哦。","哼，知道来看我啦。","别光看，画两笔给我瞧瞧。",
+    "颜料我调好了，就等你的手。","你是来看画的，还是来看我的。",
+    "这片粉是我自己刷的，好看吧。","手别抖，颜色会脏的。",
+    "我头上有颗果子，别惦记。","刚给你留了正中间的位置，坐好。",
+    "……你眼睛怎么一直盯着我。","来都来了，坐下。画布在那边。",
+    "今天的粉色，是按你上次说的调的。","我这盘颜料只给你一个人碰。",
+    "别急着戳，先看看我。","你一笑，我这坨粉色就更亮了。",
+    "……我等你等得胳膊都端酸了。","这么晚来，是又忘了吃饭吧。",
+    "调色盘有点重，但它不沉。","我可不是随便谁都给画的。",
+    "你手好凉，是不是又没穿外套。","行吧，看你这么想看，我转个圈。",
+    "戳我可以，别戳我的颜料。"
+  ],
+  t2:[
+    "哎呀，别戳，颜料要洒了。","轻点轻点，我手上还端着盘子呢。",
+    "……你再戳，那坨蓝色就归你了。","痒痒的，别闹。",
+    "喂，这坨红是新磨的，很贵。","你戳一下就少一点灵感，知道吗。",
+    "手别抖，我端着呢。","……你再这样，我就把白颜料藏起来。",
+    "别戳了别戳了，耳朵都热了。","我躲……躲哪儿你都戳得到是不是。",
+    "这两撇眉毛是我故意画的，不许笑。","唔，别挠我下巴。",
+    "你戳得我都站不稳了。","颜料要是洒了，你负责收拾。",
+    "再戳，我就把调色盘翻你身上。","……我脸上是不是沾到红了。",
+    "你手是不是欠，嗯？","就这么好玩吗，戳戳戳。",
+    "我警告你，我脾气可不好。","哼，假装不理你三秒。一。二。……算了。",
+    "你戳左边我没反应，戳右边……也没反应。真的。",
+    "再戳一下，那坨蓝真归你了，我说到做到。"
+  ],
+  t3:[
+    "好吧好吧，我陪你。","嗯，我一直在的。",
+    "……被你戳得有点想笑，不承认。","你要是走了，这盘颜料谁来用啊。",
+    "……其实你每次来，我都听得见。","别走那么快，我还没画完你。",
+    "留下来吧，给你画张像。","嗯，戳吧，我不生气，真的。",
+    "……我头一次觉得粉色这么好看，是因为你。",
+    "你手放下的时候，我还有点空。","行吧，我承认，我一直在等你。",
+    "这盘颜色今天都给你用，全给你。","你画什么都行，画歪了我也夸。",
+    "……要不，你多待一会儿。就一会儿。",
+    "嗯。你戳我，我其实挺高兴的。","别告诉别人我这么黏人。",
+    "我调了个新颜色，像你今天的样子。","……你再来，我就把这颗果子给你摘了。",
+    "今晚的颜色偏暖，是因为你在。",
+    "你要真想留下，我连画笔都给你削好。"
+  ],
+  dbl:[
+    "双击干嘛，是想要抱抱吗。","……你手欠得有点可爱。",
+    "再双击，我就把这坨红抹你脸上。","……亲一下就算了，别得寸进尺。",
+    "喂，我才不会脸红。……真的没有。","哼，你倒是挺会挑地方下手。",
+    "……好吧，抱一下，就一下。","你这一下，让我调好的蓝都变甜了。"
+  ],
+  hold:[
+    "（被你按住，乖乖不动）","……你按着我，是想让我画你吗。",
+    "认输认输，松开手啦。","别按了，颜料真的要洒了。",
+    "……你压得我耳朵都软了。","好好好，我什么都答应你，手松开。",
+    "（一动不动，假装很乖）","你再按，我可要咬你手指了。"
+  ],
+  dislike:[
+    "戳这么狠，颜料都洒了。","……我先躲一下，不行吗。",
+    "手欠！这一笔算你的。","够了啊，我要沉下去了。",
+    "你今天是来欺负我的吧。","哼，不理你了。……真的不理了。",
+    "再戳我就把整盘扣你头上。","……躲三秒。一……行了你赢了。"
+  ],
+  drag:[
+    "喂，你要把我端到哪儿去。","别晃，颜料会洒的。",
+    "……轻点放，我晕。","拖吧，反正我跟着你走。",
+    "你把这盘颜色拎起来了，行吧。"
+  ],
+  fling:[
+    "啊，你把我扔出去了！","……我自己滚回来。哼。",
+    "扔这么远，你够狠。","（揣着调色盘慢慢滚回原位）"
+  ]
+};
+
+const easterEggs = {
+  30:  "……戳满三十次了。你比我想的还有耐心。偷偷说，我不讨厌。",
+  60:  "六十次。你是不是今天没别的事干了。……可我还是留着这盘颜料等你。",
+  100: "一百次。行，你彻底赢了。这颗果子摘给你，别弄丢了。"
+};
+const suffix = ["","","","……","哼。","（小声）","……你听见了别说出去。"];
+
+const idleWords = [
+  "……这坨粉色要再亮一点。","你画过海吗，我真画过。","别看我，看画。",
+  "……其实我挺喜欢被你戳的。","该喝水了，画画的都知道。",
+  "窗外的灯还亮着，你是不是又没睡。","颜料干在盘上会心疼的，你快来用。",
+  "我把最中间那笔留给你了。","今天光线不错，适合画海。",
+  "……你多久没来看我了。","这颗果子今天特别红。",
+  "画画的人要记得吃饭，说的就是你。","别老低头，脖子会酸。",
+  "我又调了个新颜色，猜猜像什么。","安静的时候，粉色会变浅，你发现没。",
+  "……要不，你今天就多陪我一会儿。","我端盘子端累了，你替我端会儿？",
+  "夜里画的海，蓝得不一样。","你上次说的那个颜色，我配出来了。",
+  "……在想你。啊，我没说。"];
+
+function pick(a){
+  let tries = 0, text;
+  do { text = a[Math.floor(Math.random()*a.length)]; tries++; }
+  while (text === lastLine && a.length > 1 && tries < 8);
+  lastLine = text;
+  if (Math.random() < 0.28) text += suffix[Math.floor(Math.random()*suffix.length)];
+  return text;
+}
+function say(text,ms=2400){
+  bubble.textContent = text;
+  bubble.classList.add('show');
+  clearTimeout(bubble._t);
+  bubble._t = setTimeout(()=>bubble.classList.remove('show'),ms);
+}
+function bump(d){ heat = Math.max(0,Math.min(100,heat+d)); }
+function setMouth(kind){
+  if(kind==='happy'){ mouth.setAttribute('d','M178 262 Q200 284 222 262'); }
+  else if(kind==='grumpy'){ mouth.setAttribute('d','M182 276 Q200 262 218 276'); }
+  else { mouth.setAttribute('d','M182 268 Q190 278 200 268 Q210 278 218 268'); }
+}
+function pop(){ pet.classList.remove('poke'); void pet.offsetWidth; pet.classList.add('poke'); }
+function logGesture(type){
+  window.gestureLog.push({type:type, t:Date.now()});
+  if(window.gestureLog.length>200) window.gestureLog.shift();
+}
+
+/* ============ 核心：暴露给外层 Kotlin 的引擎 ============ */
+window.petEngine = {
+  onTap: function(){
+    taps++; logGesture('tap');
+    if (easterEggs[taps]) { say(easterEggs[taps], 3600); setMouth('happy'); pop(); bump(10); return; }
+    const now = Date.now();
+    if(dislikeCooldown > now){ say(pick(lines.dislike),1900); setMouth('grumpy'); pop(); bump(6); return; }
+    if(heat > 72){ dislikeCooldown = now + 4000; say(pick(lines.dislike),2100); setMouth('grumpy'); pop(); bump(8); return; }
+    if(heat > 38){ say(pick(lines.t2),2400); setMouth('grumpy'); pop(); bump(7); }
+    else { say(pick(lines.t1),2400); setMouth('happy'); pop(); bump(6); }
+  },
+  onDoubleTap: function(){
+    taps += 2; logGesture('double');
+    say(pick(lines.dbl),2400); setMouth('happy'); pop(); bump(12);
+  },
+  onLongPress: function(){
+    logGesture('long');
+    say(pick(lines.hold),2800); setMouth('grumpy'); bump(-5);
+  },
+  onDragEnd: function(){
+    logGesture('drag');
+    say(pick(lines.drag),2200); setMouth('grumpy');
+  },
+  onFlingBack: function(){
+    logGesture('fling');
+    say(pick(lines.fling),2400); setMouth('grumpy'); pop();
+  }
+};
+
+setInterval(()=>{ if(heat>0) heat = Math.max(0,heat-1.5); },500);
+setInterval(()=>{ if(!bubble.classList.contains('show')) say(pick(idleWords),2600); }, 9500);
+setTimeout(()=>say("我在这片粉色里等你很久了。",3000),600);
+</script>
+</body>
+</html>
